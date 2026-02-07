@@ -10,10 +10,13 @@ def matrix_inverse(A):
     # Check if square matrix
     if A.ndim != 2 or A.shape[0] != A.shape[1]:
         return None
+    # Check determinant
+    det = np.linalg.det(A)
 
-    try:
-        A_inv = np.linalg.inv(A)
-        return A_inv
-    except np.linalg.LinAlgError:
-        # Singular matrix (not invertible)
+    # Singular matrix check
+    if np.isclose(det, 0.0):
         return None
+    
+    A_inv = np.linalg.inv(A)
+    return A_inv
+     
